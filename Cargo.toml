@@ -1,5 +1,5 @@
 [package]
-name = "offerings-scraper"
+name = "warframe-syndicate-offerings-scraper"
 version = "1.0.0"
 edition = "2021"
 
