@@ -1,6 +1,7 @@
+use std::io::prelude::*;
 use std::{
     collections::HashMap,
-    fs, process, thread,
+    fs, io, process, thread,
     time::{Duration, SystemTime, UNIX_EPOCH},
 };
 
@@ -244,6 +245,10 @@ fn main() {
         serde_json::to_string(&cache_data).expect("failed to stringify cache data"),
     )
     .expect("failed to write cache file");
+
+    // prevent insta closing after finish if someone were to run the exe directly
+    println!("\x1B[36mpress enter to exit...\x1B[0m");
+    io::stdin().read(&mut [0u8]).unwrap();
 }
 
 fn get_orders(
