@@ -218,7 +218,14 @@ fn main() {
         println!("--------------------")
     }
 
-    let mut sorted_prices: Vec<(&String, &PriceData)> = prices.iter().collect();
+    let mut sorted_prices: Vec<(&String, &PriceData)> = offerings
+        .iter()
+        .filter_map(|offering| {
+            prices
+                .get(offering)
+                .and_then(|price| Some((offering, price)))
+        })
+        .collect();
 
     sorted_prices.sort_by(|(_, a), (_, b)| {
         a.lowest_5_prices
